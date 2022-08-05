@@ -1,0 +1,8 @@
+<button
+  (click)="onClick()"
+  [ngClass]="isSumHole ? 'sum-hole' : 'hole'"
+  class="pot"
+  id="pt{{ index == 1 ? location : 6 - location }}"
+>
+  {{ stone }}
+</button>

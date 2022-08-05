@@ -1,0 +1,20 @@
+<h1>Sıra: {{ turn ? "Sağ" : "Sol" }}</h1>
+
+<div class="board">
+  <div class="section midsection">
+    <app-player-side
+      (sendStones)="clickHole($event)"
+      [playerSide]="true"
+      [board]="board"
+    ></app-player-side>
+    <app-player-side
+      (sendStones)="clickHole($event)"
+      [playerSide]="false"
+      [board]="board"
+    ></app-player-side>
+  </div>
+</div>
+
+<h1>Skor {{ score$ | async  | json }}</h1>
+
+<button (click)="resetGame()">Sıfırla</button>

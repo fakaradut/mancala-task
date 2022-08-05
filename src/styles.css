@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+.board {
+  display: flex;
+  background-color: SaddleBrown;
+  height: 200px;
+  width: 800px;
+  border-radius: 50px;
+  padding: 30px;
+  margin: auto;
+}
+
+.section {
+  background-color: rgba(255, 255, 255, 0.03);
+  margin: 5px;
+}
+
+.endsection {
+  display: flex;
+  /* flex-grow: 1; */
+}
+
+.midsection {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 6;
+}
+
+.midrow {
+  display: flex;
+  flex-grow: 1;
+}
+
+.pot {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.08);
+  flex-grow: 1;
+  margin: 5px;
+  border-radius: 50px;
+}
+
+.bead {
+  position: absolute;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.hole{
+  flex-grow: 2;
+  width: 80px;
+  height: 80px;
+}
+.sum-hole{
+  flex-grow: 1;
+  width: 100px;
+  height: 200px;
+}

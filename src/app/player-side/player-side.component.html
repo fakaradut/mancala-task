@@ -1,0 +1,35 @@
+  <ng-container *ngIf="playerSide; else elseTemplate">
+    <div class="midrow topmid">
+      <app-hole [location]="0" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][0]"></app-hole>
+      <app-hole [location]="1" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][1]"></app-hole>
+      <app-hole [location]="2" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][2]"></app-hole>
+      <app-hole [location]="3" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][3]"></app-hole>
+      <app-hole [location]="4" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][4]"></app-hole>
+      <app-hole [location]="5" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][5]"></app-hole>
+
+    <div class="section endsection">
+      <div class="pot" id="mt">
+        <app-hole [location]="6" [index]="index" (setStones)="takeLocation($event)" [isSumHole]="true" [stone]="board[index][6]"></app-hole>
+      </div>
+    </div>
+  </div>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <div class="midrow botmid">
+      <div class="section endsection">
+      <div class="pot" id="mt">
+        <app-hole [location]="6" [index]="index" (setStones)="takeLocation($event)" [isSumHole]="true" [stone]="board[index][6]"></app-hole>
+      </div>
+    </div>
+    <app-hole [location]="5" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][5]"></app-hole>
+    <app-hole [location]="4" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][4]"></app-hole>
+    <app-hole [location]="3" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][3]"></app-hole>
+    <app-hole [location]="2" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][2]"></app-hole>
+    <app-hole [location]="1" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][1]"></app-hole>
+      <app-hole [location]="0" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][0]"></app-hole>
+    </div>
+  </ng-template>
+
+
+
