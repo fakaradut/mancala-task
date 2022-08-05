@@ -24,6 +24,9 @@ export class HoleComponent implements OnInit {
   @Input() stone: number = 0;
 
   onClick() {
+    if (this.location == 6) {
+      return;
+    }
     this.setStones.emit([this.index, this.location]);
   }
 

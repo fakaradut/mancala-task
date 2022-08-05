@@ -15,6 +15,11 @@
   </div>
 </div>
 
-<h1>Skor {{ score$ | async  | json }}</h1>
+<ng-container *ngIf="score">
+  <h2>Siz : {{ score.playerScore }}</h2>
+  <h2>Rakip : {{ score.opponentScore }}</h2>
+</ng-container>
 
-<button (click)="resetGame()">Sıfırla</button>
+
+
+<!-- <button (click)="resetGame()">Sıfırla</button> -->
