@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit {
   gameLogic;
   board: any;
 
-  @Select(BoardState.getTurn) turn$: Observable<BoardStateModel>;
+  @Select(BoardState) turn$: Observable<BoardStateModel>;
   @Select(ScoreState) score$: Observable<ScoreStateModel>;
 
   turn: 0 | 1 | undefined = 0;
