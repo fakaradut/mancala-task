@@ -52,6 +52,7 @@ export class BoardComponent implements OnInit {
 
   resetGame() {
     this.gameLogic.resetBoard();
+    this.board = this.store.selectSnapshot(BoardState.getBoard) as number[][];
   }
 
 }

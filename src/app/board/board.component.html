@@ -1,25 +1,29 @@
-<h1>Sıra: {{ turn ? "Sağ" : "Sol" }}</h1>
+<div class="score-area">
+
+  <ng-container *ngIf="score">
+    <h1 class="score">
+      Siz : {{ score.playerScore }}
+      Rakip : {{ score.opponentScore }}
+    </h1>
+  </ng-container>
+
+  <h1 class="turn">Sıra: {{ turn ? "Sağ" : "Sol" }}</h1>
+
+
+</div>
+
 
 <div class="board">
   <div class="section midsection">
     <app-player-side
-      (sendStones)="clickHole($event)"
-      [playerSide]="true"
+    (sendStones)="clickHole($event)"
+    [playerSide]="true"
       [board]="board"
     ></app-player-side>
     <app-player-side
       (sendStones)="clickHole($event)"
       [playerSide]="false"
       [board]="board"
-    ></app-player-side>
+      ></app-player-side>
+    </div>
   </div>
-</div>
-
-<ng-container *ngIf="score">
-  <h2>Siz : {{ score.playerScore }}</h2>
-  <h2>Rakip : {{ score.opponentScore }}</h2>
-</ng-container>
-
-
-
-<!-- <button (click)="resetGame()">Sıfırla</button> -->

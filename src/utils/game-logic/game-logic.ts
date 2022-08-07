@@ -4,6 +4,7 @@ import { UpdateBoard, UpdateGameover, UpdateTurn } from "src/store/actions/board
 import { UpdateScore } from "src/store/actions/score.action";
 import { Board } from "src/store/models/Board";
 import { BoardState } from "src/store/state/board.state";
+import { ScoreState } from "src/store/state/score.state";
 
 export class GameLogic {
 
@@ -27,50 +28,50 @@ export class GameLogic {
     this.turn = this.store.selectSnapshot(BoardState.getTurn) as 0 | 1;
 
     // board.subscribe(stones1 => {
-      let stones = JSON.parse(JSON.stringify(board))
+    let stones = JSON.parse(JSON.stringify(board))
 
 
-      let inhand = stones[side][index];
-      if (side !== this.turn || !inhand || this.gameover) return;
+    let inhand = stones[side][index];
+    if (side !== this.turn || !inhand || this.gameover) return;
 
+    stones[side][index] = 0;
+
+    // deposit stones
+    let last;
+    while (inhand) {
+      index++;
+      if (index > 6) {
+        side = Math.abs(side - 1);
+        index = 0;
+      }
+      last = stones[side][index];
+      if (index < 6 || this.turn === side) {
+        stones[side][index] += 1;
+        inhand--;
+      }
+    }
+    if (!last && index < 6 && side === this.turn) {
+      let oppSide = Math.abs(side - 1);
+      let oppIndex = 5 - index;
+      let oppVal = stones[oppSide][oppIndex];
+      stones[oppSide][oppIndex] = 0;
       stones[side][index] = 0;
+      stones[side][6] += oppVal + 1;
+    }
 
-      // deposit stones
-      let last;
-      while (inhand) {
-        index++;
-        if (index > 6) {
-          side = Math.abs(side - 1);
-          index = 0;
-        }
-        last = stones[side][index];
-        if (index < 6 || this.turn === side) {
-          stones[side][index] += 1;
-          inhand--;
-        }
-      }
-      if (!last && index < 6 && side === this.turn) {
-        let oppSide = Math.abs(side - 1);
-        let oppIndex = 5 - index;
-        let oppVal = stones[oppSide][oppIndex];
-        stones[oppSide][oppIndex] = 0;
-        stones[side][index] = 0;
-        stones[side][6] += oppVal + 1;
-      }
+    let remain = this.isGameOver(stones);
 
-      let remain = this.isGameOver(stones);
-
-      if (remain != false) {
-        stones[0][6] += (remain as number[])[0];
-        stones[1][6] += (remain as number[])[1];
-        this.gameover = true;
-        this.updateGameover(this.gameover);
-        this.setScore();
-      } else if (index !== 6) {
-        this.turn = Math.abs(this.turn - 1) as 0 | 1;
-      }
-      this.updateTurn(this.turn);
-      this.updateBoard(stones as number[][]);
+    if (remain != false) {
+      stones[0][6] += (remain as number[])[0];
+      stones[1][6] += (remain as number[])[1];
+      this.gameover = true;
+      this.updateGameover(this.gameover);
+      this.setScore();
+    } else if (index !== 6) {
+      this.turn = Math.abs(this.turn - 1) as 0 | 1;
+    }
+    this.updateTurn(this.turn);
+    this.updateBoard(stones as number[][]);
     // });
 
   }
@@ -113,9 +114,9 @@ export class GameLogic {
   }
 
   resetBoard() {
-    this.store.dispatch(new UpdateBoard({
-      ...new Board()
-    }));
+    this.updateBoard({ board: [[4, 4, 4, 4, 4, 4, 0], [4, 4, 4, 4, 4, 4, 0]] });
+
+    this.store.dispatch(new UpdateScore({ playerScore: 0, opponentScore: 0 }));
   }
 
 }
