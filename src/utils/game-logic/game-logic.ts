@@ -31,7 +31,6 @@ export class GameLogic {
 
 
       let inhand = stones[side][index];
-      console.log(`>>> start at [${side}, ${index}] with ${inhand}`);
       if (side !== this.turn || !inhand || this.gameover) return;
 
       stones[side][index] = 0;
@@ -45,13 +44,11 @@ export class GameLogic {
           index = 0;
         }
         last = stones[side][index];
-        console.log(side, index, "=", last);
         if (index < 6 || this.turn === side) {
           stones[side][index] += 1;
           inhand--;
         }
       }
-      console.log("last spot", side, index, last);
       if (!last && index < 6 && side === this.turn) {
         let oppSide = Math.abs(side - 1);
         let oppIndex = 5 - index;
@@ -59,11 +56,8 @@ export class GameLogic {
         stones[oppSide][oppIndex] = 0;
         stones[side][index] = 0;
         stones[side][6] += oppVal + 1;
-        console.log("bonus: landed in empty", oppVal + 1);
       }
 
-      // test win
-      console.log("WIN TEST", this.turn, stones);
       let remain = this.isGameOver(stones);
 
       if (remain != false) {
@@ -72,12 +66,10 @@ export class GameLogic {
         this.gameover = true;
         this.updateGameover(this.gameover);
         this.setScore();
-        console.log("GAMEOVER");
       } else if (index !== 6) {
         this.turn = Math.abs(this.turn - 1) as 0 | 1;
       }
       this.updateTurn(this.turn);
-      console.log("STAONES", stones);
       this.updateBoard(stones as number[][]);
     // });
 

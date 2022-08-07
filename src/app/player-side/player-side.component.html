@@ -1,5 +1,5 @@
   <ng-container *ngIf="playerSide; else elseTemplate">
-    <div class="midrow topmid">
+    <div class="midrow topmid top-side">
       <app-hole [location]="0" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][0]"></app-hole>
       <app-hole [location]="1" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][1]"></app-hole>
       <app-hole [location]="2" [index]="index" (setStones)="takeLocation($event)" [stone]="board[index][2]"></app-hole>
@@ -16,7 +16,7 @@
   </ng-container>
 
   <ng-template #elseTemplate>
-    <div class="midrow botmid">
+    <div class="midrow botmid bottom-side">
       <div class="section endsection">
       <div class="pot" id="mt">
         <app-hole [location]="6" [index]="index" (setStones)="takeLocation($event)" [isSumHole]="true" [stone]="board[index][6]"></app-hole>

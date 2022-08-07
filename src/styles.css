@@ -48,9 +48,24 @@
   flex-grow: 2;
   width: 80px;
   height: 80px;
+  z-index: 1;
 }
 .sum-hole{
   flex-grow: 1;
   width: 100px;
-  height: 200px;
+  height: 160px;
+}
+
+.section.midsection{
+  position: relative;
+}
+
+.top-side{
+  margin-left: 130px;
+  position: absolute;
+}
+
+.bottom-side{
+  position: absolute;
+  align-items: end;
 }
